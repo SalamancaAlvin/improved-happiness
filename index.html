@@ -1,33 +1,38 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Lawliet.</title>  
-    <script src="https://cdn.tailwindcss.com"></script>  
-    <style>  
-        .centered-title { display: inline-block; text-align: center; }  .header-title { font-size: 3rem; font-weight: 700; }  
-    .section-title { font-size: 1.875rem; font-weight: 600; }  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawliet.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .centered-title { display: inline-block; text-align: center; }  
+        .header-title { font-size: 3rem; font-weight: 700; }  
+        .section-title { font-size: 1.875rem; font-weight: 600; }  
+        #typing { min-height: 1.75rem; }  
+        .card-bg { background-color: rgba(30,30,30,0.85); }  
+        .contact-card { background-color: rgba(35,35,35,0.85); border: none; }  
 
-    #typing { min-height: 1.75rem; }  
+        #stars {  
+            position: fixed;  
+            top: 0; left: 0;  
+            width: 100%;  
+            height: 100%;  
+            z-index: -1;  
+            background: #000;  
+        }
 
-    .card-bg { background-color: rgba(30,30,30,0.85); }  
-    .contact-card { background-color: rgba(35,35,35,0.85); border: none; }  
-
-    #stars {  
-        position: fixed;  
-        top: 0; left: 0;  
-        width: 100%;  
-        height: 100%;  
-        z-index: -1;  
-        background: #000;  
-    }  
-</style>
-
-</head>  
-<body class="bg-zinc-900 text-white min-h-screen p-8">  <canvas id="stars"></canvas>  
+        /* Estilo para cuando Spotify esté activo */
+        .spotify-border {
+            border: 1px solid rgba(29, 185, 84, 0.4);
+            box-shadow: 0 0 15px rgba(29, 185, 84, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-zinc-900 text-white min-h-screen p-8">
+    <canvas id="stars"></canvas>  
 
 <div class="max-w-6xl mx-auto p-8 card-bg rounded-xl shadow-2xl space-y-16">  
-
     <div class="max-w-5xl mx-auto space-y-16">  
 
         <header class="text-center space-y-3">  
@@ -36,14 +41,18 @@
         </header>  
 
         <section class="flex justify-center">  
-            <div id="discord-card" class="flex items-center card-bg rounded-lg p-5 shadow-lg space-x-4 max-w-md w-full">  
+            <div id="discord-card" class="flex items-center card-bg rounded-lg p-5 shadow-lg space-x-4 max-w-md w-full transition-all duration-500 border border-transparent">  
                 <div class="relative">  
                     <img id="discord-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" class="w-16 h-16 rounded-full">  
-                    <span id="discord-status" class="absolute bottom-0 right-0 w-5 h-5 bg-red-500 border-4 border-zinc-900 rounded-full" title="Do Not Disturb"></span>  
+                    <span id="discord-status" class="absolute bottom-0 right-0 w-5 h-5 bg-gray-500 border-4 border-zinc-900 rounded-full"></span>  
                 </div>  
                 <div class="flex-1 min-w-0">  
-                    <h2 id="discord-name" class="text-lg font-semibold truncate">Loading...</h2>  
-                    <p id="discord-activity" class="text-sm text-gray-400 truncate">Activity: Loading...</p>  
+                    <h2 id="discord-name" class="text-lg font-semibold truncate">Cargando...</h2>  
+                    <p id="discord-activity" class="text-sm text-gray-400 truncate">Esperando estado...</p>
+                    <div id="spotify-container" class="hidden flex items-center gap-1 text-xs text-green-400 mt-1">
+                        <span class="animate-pulse">🎵</span>
+                        <span id="spotify-details" class="truncate font-medium"></span>
+                    </div>
                 </div>  
             </div>  
         </section>  
@@ -82,7 +91,6 @@
                 <h2 class="section-title border-b-2 border-purple-500 pb-1 centered-title">My Projects 💖</h2>  
             </div>  
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">  
-
                 <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
                     <img src="https://images.ctfassets.net/lzny33ho1g45/2olcy4TVSWAjqy5dsxLNZd/09b4a18346af97076615d5f1d1407c39/best-ai-image-generator-hero.jpg?fm=jpg&q=31&fit=thumb&w=1520&h=760" alt="GPT4U" class="w-full h-36 object-cover">  
                     <div class="p-4 flex-1 flex flex-col">  
@@ -91,88 +99,12 @@
                         <a href="https://github.com/purrre/GPT4U" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm">GitHub →</a>  
                     </div>  
                 </div>  
-
-                <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
-                    <img src="media/wrld.jpg" alt="wrld" class="w-full h-36 object-cover">  
-                    <div class="p-4 flex-1 flex flex-col">  
-                        <h3 class="text-lg font-semibold mb-1">wrld</h3>  
-                        <p class="text-gray-400 text-xs mb-3 flex-1">Discord bot to get Juice WRLD information via juicewrldapi.com, written in Python</p>  
-                        <div class="flex gap-4">  
-                            <a href="https://github.com/purrre/wrld-bot" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm">GitHub →</a>  
-                            <a href="https://discord.com/oauth2/authorize?client_id=806666114666725378&permissions=563364418145344&integration_type=0&scope=bot" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm">Invite →</a>  
-                        </div>  
-                    </div>  
                 </div>  
-
-                <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
-                    <img src="https://mac.eltima.com/wp-content/uploads/2023/01/mpv.jpg" alt="MPV Things" class="w-full h-36 object-cover">  
-                    <div class="p-4 flex-1 flex flex-col">  
-                        <h3 class="text-lg font-semibold mb-1">MPV Things</h3>  
-                        <p class="text-gray-400 text-xs mb-3 flex-1">A collection of batch and lua scripts I've created for the MPV media player</p>  
-                        <a href="https://github.com/purrre/mpv-scripts" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm">GitHub →</a>  
-                    </div>  
-                </div>  
-
-                <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
-                    <img src="media/2b2w.png" alt="2b2w" class="w-full h-36 object-cover">  
-                    <div class="p-4 flex-1 flex flex-col">  
-                        <h3 class="text-lg font-semibold mb-1">2b2w</h3>  
-                        <p class="text-gray-400 text-xs mb-3 flex-1">Utility bot for 2b2w.org, a small Minecraft network I co-own. Runs fully externally</p>  
-                        <span class="text-gray-500 text-xs">Private</span>  
-                    </div>  
-                </div>  
-
-                <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
-                    <img src="media/mercury.jpeg" alt="Mercury" class="w-full h-36 object-cover">  
-                    <div class="p-4 flex-1 flex flex-col">  
-                        <h3 class="text-lg font-semibold mb-1">Mercury</h3>  
-                        <p class="text-gray-400 text-xs mb-3 flex-1">Entertainment/Engagement bot for Discord with the goal of upping user engagement in your server. Unfortunately discontinued.</p>  
-                        <div class="flex gap-4 items-center">  
-                            <a href="https://github.com/purrre/mercury" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm">GitHub →</a>  
-                            <span class="text-gray-500 text-xs">Invite</span>  
-                        </div>  
-                    </div>  
-                </div>  
-
-                <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
-                    <img src="media/releasetracker.png" alt="Release Tracker" class="w-full h-36 object-cover">  
-                    <div class="p-4 flex-1 flex flex-col">  
-                        <h3 class="text-lg font-semibold mb-1">Release Tracker</h3>  
-                        <p class="text-gray-400 text-xs mb-3 flex-1">A Discord bot to track new releases for PaperMC, Java Edition, Bedrock Edition, and Bedrock Dedicated Server (BDS)</p>  
-                        <span class="text-gray-500 text-xs">Private</span>  
-                    </div>  
-                </div>  
-
-                <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
-                    <img src="https://placehold.co/600x400?text=Placeholder" alt="Build Archive" class="w-full h-36 object-cover">  
-                    <div class="p-4 flex-1 flex flex-col">  
-                        <h3 class="text-lg font-semibold mb-1">Build Archive</h3>  
-                        <p class="text-gray-400 text-xs mb-3 flex-1">Service that archives builds created on the 2b2w network. Runs a clean website to view builds along with a public API. Coming Soon</p>  
-                        <div class="flex gap-4 items-center">  
-                          <a href="https://github.com/purrre/mpv-scripts" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm">GitHub →</a>  
-                          <span class="text-gray-500 text-xs">Website → (soon)</span>  
-                        </div>  
-                    </div>  
-                </div>  
-
-                <div class="card-bg rounded-lg overflow-hidden shadow-lg flex flex-col hover:scale-[1.03] transition-transform duration-300">  
-                    <img src="media/DUK.jpg" alt="Placeholder Project" class="w-full h-36 object-cover">  
-                    <div class="p-4 flex-1 flex flex-col">  
-                        <h3 class="text-lg font-semibold mb-1">DUK</h3>  
-                        <p class="text-gray-400 text-xs mb-3 flex-1">Private server management bot created for TDC; Join the Discord below</p>  
-                        <div class="flex gap-4 items-center">  
-                            <span class="text-gray-500 text-xs">Private</span>  
-                            <span class="text-gray-500 text-xs">Discord → (coming soon)</span>  
-                        </div>  
-                    </div>  
-                </div>  
-            </div>  
         </section>  
 
         <section class="space-y-4">  
             <h2 class="section-title border-b-2 border-purple-500 inline-block pb-1">Contact</h2>  
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">  
-
                 <div class="contact-card rounded-lg p-4 shadow-lg flex flex-col space-y-2">  
                     <div class="flex items-center gap-2">  
                         <img src="https://cdn.brandfetch.io/idM8Hlme1a/theme/dark/symbol.svg" alt="Discord Icon" class="w-7 h-7">  
@@ -181,40 +113,102 @@
                     <p class="text-gray-400 text-xs flex-1">Message me on Discord</p>  
                     <a href="https://discord.com/users/527172619514937354" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm font-medium">Go →</a>  
                 </div>  
-
-                <div class="contact-card rounded-lg p-4 shadow-lg flex flex-col space-y-2">  
-                    <div class="flex items-center gap-2">  
-                        <img src="https://cdn.brandfetch.io/idZAyF9rlg/theme/light/symbol.svg" alt="GitHub Icon" class="w-7 h-7">  
-                        <h3 class="text-lg font-semibold">GitHub</h3>  
-                    </div>  
-                    <p class="text-gray-400 text-xs flex-1">View my projects & repositories</p>  
-                    <a href="https://github.com/purrre" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm font-medium">Visit →</a>  
                 </div>  
-
-                <div class="contact-card rounded-lg p-4 shadow-lg flex flex-col space-y-2">  
-                    <div class="flex items-center gap-2">  
-                        <img src="https://cdn.brandfetch.io/idQMCIvout/w/1139/h/926/theme/dark/logo.png" alt="Twitter Icon" class="w-7 h-7">  
-                        <h3 class="text-lg font-semibold">Twitter</h3>  
-                    </div>  
-                    <p class="text-gray-400 text-xs flex-1">Message me on Twitter/X</p>  
-                    <a href="https://x.com/purezeroh" target="_blank" class="text-purple-400 hover:text-purple-300 transition text-sm font-medium">Visit →</a>  
-                </div>  
-
-                <div class="contact-card rounded-lg p-4 shadow-lg flex flex-col space-y-2">  
-                    <div class="flex items-center gap-2">  
-                        <img src="https://cdn.brandfetch.io/idG21jby45/theme/dark/symbol.svg" alt="Email Icon" class="w-7 h-7">  
-                        <h3 class="text-lg font-semibold">Email</h3>  
-                    </div>  
-                    <p class="text-gray-400 text-xs flex-1">Email Me</p>  
-                    <a href="mailto:purrre@proton.me" class="text-purple-400 hover:text-purple-300 transition text-sm font-medium">Go →</a>  
-                </div>  
-
-            </div>  
         </section>  
     </div>  
 </div>  
 
-<script src="script.js"></script>
+<script>
+    // --- LÓGICA DE DISCORD (LANYARD) ---
+    const DISCORD_ID = "527172619514937354";
+
+    async function fetchDiscordStatus() {
+        try {
+            const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+            const { data } = await response.json();
+
+            // Actualizar nombre y avatar
+            document.getElementById('discord-name').textContent = data.discord_user.username;
+            const avatar = document.getElementById('discord-avatar');
+            avatar.src = data.discord_user.avatar 
+                ? `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${data.discord_user.avatar}.webp?size=128`
+                : `https://cdn.discordapp.com/embed/avatars/0.png`;
+
+            // Actualizar círculo de estado
+            const statusCircle = document.getElementById('discord-status');
+            const colors = { online: 'bg-green-500', idle: 'bg-yellow-500', dnd: 'bg-red-500', offline: 'bg-gray-500' };
+            statusCircle.className = `absolute bottom-0 right-0 w-5 h-5 border-4 border-zinc-900 rounded-full ${colors[data.discord_status]}`;
+
+            // Actualizar Actividad y Spotify
+            const activityLabel = document.getElementById('discord-activity');
+            const spotifyContainer = document.getElementById('spotify-container');
+            const spotifyDetails = document.getElementById('spotify-details');
+            const card = document.getElementById('discord-card');
+
+            if (data.listening_to_spotify) {
+                activityLabel.textContent = "Escuchando Spotify";
+                spotifyContainer.classList.remove('hidden');
+                spotifyDetails.textContent = `${data.spotify.song} - ${data.spotify.artist}`;
+                card.classList.add('spotify-border');
+            } else {
+                spotifyContainer.classList.add('hidden');
+                card.classList.remove('spotify-border');
+                
+                if (data.activities.length > 0) {
+                    const activity = data.activities.find(a => a.type !== 4) || data.activities[0];
+                    activityLabel.textContent = activity.name;
+                } else {
+                    activityLabel.textContent = data.discord_status === 'offline' ? "Desconectado" : "Sin actividad";
+                }
+            }
+        } catch (error) {
+            console.error("Error al obtener datos de Discord:", error);
+        }
+    }
+
+    // Inicializar y repetir cada 15 seg
+    fetchDiscordStatus();
+    setInterval(fetchDiscordStatus, 15000);
+
+    // --- EFECTO DE ESTRELLAS ---
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const stars = Array(150).fill().map(() => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 1.5,
+        velocity: Math.random() * 0.5
+    }));
+
+    function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'white';
+        stars.forEach(s => {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+            ctx.fill();
+            s.y += s.velocity;
+            if (s.y > canvas.height) s.y = 0;
+        });
+        requestAnimationFrame(animateStars);
+    }
+    animateStars();
+
+    // --- EFECTO DE TYPING ---
+    const text = "Full Stack Developer | Python Enthusiast | Automation Expert";
+    let i = 0;
+    function typeWriter() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    typeWriter();
+</script>
 
 </body>  
-	</html>
+</html>

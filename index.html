@@ -128,7 +128,8 @@
             const { data } = await response.json();
 
             // Actualizar nombre y avatar
-            document.getElementById('discord-name').textContent = data.discord_user.username;
+            document.getElementById('discord-name').textContent =
+    data.discord_user.global_name || data.discord_user.username;
             const avatar = document.getElementById('discord-avatar');
             avatar.src = data.discord_user.avatar 
                 ? `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${data.discord_user.avatar}.webp?size=128`
@@ -212,6 +213,7 @@
 
 </body>  
 </html>
+
 
 
 
